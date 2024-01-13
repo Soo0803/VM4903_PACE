@@ -161,28 +161,41 @@ def create_image_button(image_path, key, size=(100, 100)):
 
 # Define the layout here
 layout = [
-    [sg.Column([
+    [
+     sg.Column([
+        [sg.Text('', size=(1,1))]     
+    ]),
+    sg.Column([
         [sg.Text('', size=(1,1))],
         [create_image_button(left_foot_grey_image, '-LEFT-FOOT-', size=(350, 700))],
     ]),
-    sg.Column([
-        
-        [sg.Text('', size=(1,4))],
-        [sg.Text('', size=(1,1)), sg.Text('🎯', font=('Helvetica', 22)), sg.Text(f'{target_load:.1f} kg', key='-TARGET-LOAD-', font=('Helvetica', 18)),
-         sg.Text('⚡', font=('Helvetica', 18)),  # Buffer space
-         sg.Text(f'{current_load:.1f} kg', key='-CURRENT-LOAD-', font=('Helvetica', 18))],  
-        [sg.Text('', size = (11,1)), create_image_button(plus_button_grey, '-PLUS-', size=(100, 100))],
-        [create_image_button(play_button_grey, '-PLAY-PAUSE-', size=(100, 100)), sg.Text('', size=(10,1)), create_image_button(star_button_grey, '-STAR-', size=(100, 100))],
-        [sg.Text('', size=(11,1)), create_image_button(minus_button_grey, '-MINUS-', size=(100, 100))]
+     sg.Column([
+        [sg.Text('', size=(11,1))]     
     ]),
-    sg.Column([
+     sg.Column([
+        
+        [sg.Text('', size=(1,3))],
+        [sg.Text('', size=(1,1)), sg.Text('🎯', font=('Helvetica', 24)), sg.Text(f'{target_load:.1f} kg', key='-TARGET-LOAD-', font=('Helvetica', 20)),
+         sg.Text('⚡', font=('Helvetica', 20)),  # Buffer space
+         sg.Text(f'{current_load:.1f} kg', key='-CURRENT-LOAD-', font=('Helvetica', 20))],  
+        [sg.Text('', size=(1,1))],
+        [sg.Text('', size = (12,1)), create_image_button(plus_button_grey, '-PLUS-', size=(100, 100))],
+        # [sg.Text('', size=(1,1))],
+        [create_image_button(play_button_grey, '-PLAY-PAUSE-', size=(100, 100)), sg.Text('', size=(12,1)), create_image_button(star_button_grey, '-STAR-', size=(100, 100))],
+        # [sg.Text('', size=(1,1))],
+        [sg.Text('', size=(12,1)), create_image_button(minus_button_grey, '-MINUS-', size=(100, 100))]
+    ]),
+     sg.Column([
+        [sg.Text('', size=(11,1))]     
+    ]),
+     sg.Column([
         [sg.Button(image_filename = resize_company_logo_path, key='-FOOT-COMFORT-BUTTON-', border_width=0, button_color=(background_color, background_color)),
          sg.Text("Foot Comfort Technology", font=("Helvetica", 14))],
         [create_image_button(right_foot_grey_image, '-RIGHT-FOOT-', size=(350, 700))]
     ])]
 ]
 
-window = sg.Window('Foot Comfort Control', layout, finalize=True, background_color=background_color, default_element_size=(30, 1))
+window = sg.Window('Foot Comfort Control', layout, finalize=True, size=(1280, 800), background_color=background_color, default_element_size=(30, 1))
 
 # create window and set the window's location to center it
 #...
