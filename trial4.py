@@ -14,14 +14,14 @@ sg.theme('Dark')
 background_color = sg.theme_background_color()
 
 
-# try:
-#     ser = serial.Serial('COM9', 9600)
-#     # Replace 'COM9' with '/dev/ttyUSB0' or the correct port
-# #    ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
-#     # Configure the serial connections (the parameters differ on the device you are connecting to)
-#     ser.flush()
-# except serial.SerialException:
-#     print("Could not open serial port.")
+try:
+    ser = serial.Serial('COM9', 9600)
+    # Replace 'COM9' with '/dev/ttyUSB0' or the correct port
+#    ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
+    # Configure the serial connections (the parameters differ on the device you are connecting to)
+    ser.flush()
+except serial.SerialException:
+    print("Could not open serial port.")
 
 # Correct Byte Commands as per Arduino Master Code
 left_foot_command = b'\x01'  # Raw byte command for Left Foot (equivalent to 0x01)
@@ -163,7 +163,7 @@ def create_image_button(image_path, key, size=(100, 100)):
 layout = [
     [sg.Column([
         [sg.Text('', size=(1,1))],
-        [create_image_button(left_foot_grey_image, '-LEFT-FOOT-', size=(300, 550))],
+        [create_image_button(left_foot_grey_image, '-LEFT-FOOT-', size=(350, 700))],
     ]),
     sg.Column([
         
@@ -178,11 +178,11 @@ layout = [
     sg.Column([
         [sg.Button(image_filename = resize_company_logo_path, key='-FOOT-COMFORT-BUTTON-', border_width=0, button_color=(background_color, background_color)),
          sg.Text("Foot Comfort Technology", font=("Helvetica", 14))],
-        [create_image_button(right_foot_grey_image, '-RIGHT-FOOT-', size=(300, 550))]
+        [create_image_button(right_foot_grey_image, '-RIGHT-FOOT-', size=(350, 700))]
     ])]
 ]
 
-window = sg.Window('Foot Comfort Control', layout, finalize=True, size=(1280, 800), background_color=background_color, default_element_size=(30, 1))
+window = sg.Window('Foot Comfort Control', layout, finalize=True, background_color=background_color, default_element_size=(30, 1))
 
 # create window and set the window's location to center it
 #...
@@ -221,11 +221,11 @@ while True:
 
         # Update Left Foot Image
         current_left_image = left_foot_color_image if is_left_foot_color else left_foot_grey_image
-        window['-LEFT-FOOT-'].update(image_filename=resize_image(current_left_image, 300, 600))
+        window['-LEFT-FOOT-'].update(image_filename=resize_image(current_left_image, 350, 700))
 
         # Update Right Foot Image to Grey
         current_right_image = right_foot_grey_image
-        window['-RIGHT-FOOT-'].update(image_filename=resize_image(current_right_image, 300, 600))
+        window['-RIGHT-FOOT-'].update(image_filename=resize_image(current_right_image, 350, 700))
 
         # ser.write(get_status_byte())
 
@@ -238,11 +238,11 @@ while True:
 
         # Update Right Foot Image
         current_right_image = right_foot_color_image if is_right_foot_color else right_foot_grey_image
-        window['-RIGHT-FOOT-'].update(image_filename=resize_image(current_right_image, 300, 600))
+        window['-RIGHT-FOOT-'].update(image_filename=resize_image(current_right_image, 350, 700))
 
         # Update Left Foot Image to Grey
         current_left_image = left_foot_grey_image
-        window['-LEFT-FOOT-'].update(image_filename=resize_image(current_left_image, 300, 600))
+        window['-LEFT-FOOT-'].update(image_filename=resize_image(current_left_image, 350, 700))
 
         # ser.write(get_status_byte())
 
@@ -292,29 +292,29 @@ while True:
             foot_comfort_button_pressed_time = None
 
     # Send the appropriate reset command
-    # if reset_triggered:
-    #     # ser.write(reset_command)  # Send reset command if the long press condition was met
-    #     reset_triggered = False  # Reset the trigger
-    # else:
-    #     print ("no reset")
-    #     # ser.write(no_reset_command)  # Continuously send no reset command if the condition wasn't met
+    if reset_triggered:
+        # ser.write(reset_command)  # Send reset command if the long press condition was met
+        reset_triggered = False  # Reset the trigger
+    else:
+        print ("no reset")
+        # ser.write(no_reset_command)  # Continuously send no reset command if the condition wasn't met
 
-    #         # Read data from serial
+            # Read data from serial
 
 
         # Read data from serial
-    # if ser.in_waiting >= 5:  # Check if at least 5 bytes are available (1 for the flag byte + 4 for the float)
-    #         flag_byte = ser.read(1)  # Read the flag byte
-    #         if flag_byte == b'\xFF':  # Check if the flag byte is correct (0xFF)
-    #             loadcell_bytes = ser.read(4)  # Read the next 4 bytes (float)
-    #             received_load = struct.unpack('f', loadcell_bytes)[0]  # Convert bytes to float
+    if ser.in_waiting >= 5:  # Check if at least 5 bytes are available (1 for the flag byte + 4 for the float)
+            flag_byte = ser.read(1)  # Read the flag byte
+            if flag_byte == b'\xFF':  # Check if the flag byte is correct (0xFF)
+                loadcell_bytes = ser.read(4)  # Read the next 4 bytes (float)
+                received_load = struct.unpack('f', loadcell_bytes)[0]  # Convert bytes to float
 
-    #         if 0.00 <= received_load <= 15.00:  # Validate the received value
-    #                 current_load = received_load
-    #                 window['-CURRENT-LOAD-'].update(f'{current_load:.2f} kg')  # Update GUI
+            if 0.00 <= received_load <= 15.00:  # Validate the received value
+                    current_load = received_load
+                    window['-CURRENT-LOAD-'].update(f'{current_load:.2f} kg')  # Update GUI
 
-    #                 # Debugging print statement, you can remove this in production
-    #                 print("Received load =", current_load)
+                    # Debugging print statement, you can remove this in production
+                    print("Received load =", current_load)
 
         # ... (rest of your event loop)
 
@@ -324,4 +324,4 @@ while True:
 
 
 window.close()
-# ser.close()
+ser.close()
