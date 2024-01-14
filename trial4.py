@@ -135,7 +135,7 @@ resized_logo_path = prepare_logo(company_logo_path, 1, 1)  # Adjust the size as 
     
 #resize company_logo 
 resize_company_logo_path = 'resize_footlogo.png' 
-new_size = (53,35)
+new_size = (60,40)
 try:
     # Open the image file
     with Image.open(company_logo_path) as img:
@@ -240,7 +240,7 @@ while True:
         current_right_image = right_foot_grey_image
         window['-RIGHT-FOOT-'].update(image_filename=resize_image(current_right_image, 350, 700))
 
-        # ser.write(get_status_byte())
+        ser.write(get_status_byte())
 
         # Toggle Right Foot
     elif event == '-RIGHT-FOOT-':
@@ -257,31 +257,31 @@ while True:
         current_left_image = left_foot_grey_image
         window['-LEFT-FOOT-'].update(image_filename=resize_image(current_left_image, 350, 700))
 
-        # ser.write(get_status_byte())
+        ser.write(get_status_byte())
 
         # Toggle Play/Pause
     elif event == '-PLAY-PAUSE-':
         is_playing = not is_playing  # Toggle state
         new_image = pause_button_orange if is_playing else play_button_grey
         window['-PLAY-PAUSE-'].update(image_filename=resize_image(new_image, 100, 100))
-        # ser.write(play_pause_command)  # Send byte command
+        ser.write(play_pause_command)  # Send byte command
 
     elif event == '-PLUS-' and target_load < 20:
         target_load += 0.5
         window['-TARGET-LOAD-'].update(f'{target_load:.2f} kg')
-        # ser.write(increase_load_command)  # Send byte command
+        ser.write(increase_load_command)  # Send byte command
 
     elif event == '-MINUS-' and target_load > 0:
         target_load -= 0.5
         window['-TARGET-LOAD-'].update(f'{target_load:.2f} kg')
-      #  ser.write(decrease_load_command)  # Send byte command
+        ser.write(decrease_load_command)  # Send byte command
 
     # Toggle the star button's state and update its image
     elif event == '-STAR-':
         is_star_active = not is_star_active
         new_image = star_button_orange if is_star_active else star_button_grey
         window['-STAR-'].update(image_filename=resize_image(new_image, 100, 100))
-     #   ser.write(power_command)  # Send byte command
+        ser.write(power_command)  # Send byte command
 
     # Implementing long press logic for reset (placeholder)
     # Check for foot comfort button press
@@ -306,11 +306,11 @@ while True:
 
     # Send the appropriate reset command
     if reset_triggered:
-        # ser.write(reset_command)  # Send reset command if the long press condition was met
+        ser.write(reset_command)  # Send reset command if the long press condition was met
         reset_triggered = False  # Reset the trigger
     else:
-        print ("no reset")
-        # ser.write(no_reset_command)  # Continuously send no reset command if the condition wasn't met
+        # print ("no reset")
+        ser.write(no_reset_command)  # Continuously send no reset command if the condition wasn't met
 
             # Read data from serial
 
