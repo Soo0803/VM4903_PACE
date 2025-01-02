@@ -13,10 +13,6 @@ Customized orthosis production is crucial for addressing foot-related issues, ye
 1. [Introduction](#1-introduction)
 2. [Materials and Methods](#2-materials-and-methods)
 3. [Results and Discussion](#3-results-and-discussion)
-4. [Installation](#4-installation)
-5. [Usage](#5-usage)
-6. [Contributing](#6-contributing)
-7. [License](#7-license)
 
 ## 1. Introduction
 
@@ -46,18 +42,3 @@ Foot orthoses are essential for various foot conditions, but traditional manufac
 - **Arch Height Measurement:** Statistical analysis of orthosis geometry to assess reliability.
 - **Intraclass Correlation Coefficients (ICCs):** Comparison with benchmark data for validation.
 
-## 4. Installation
-
-Describe how to install the code, dependencies, and any setup steps required for users to run the project locally.
-
-## 5. Usage
-
-Provide instructions on how to use the repository, including examples and command-line options.
-
-## 6. Contributing
-
-Outline guidelines for contributing to the repository, including code formatting, issue reporting, and pull request instructions.
-
-## 7. License
-
-Specify the project's license information.
