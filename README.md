@@ -1,6 +1,7 @@
 # Pneumatically Actuated Conforming Ergonomic System for Custom Foot Orthoses (PACE)
 
-**Authors:** Soo Wei Jie, Krin Muangsiri, Choo Lee Wen  
+**Undergraduate Research Students:** Soo Wei Jie, Krin Muangsiri, Choo Lee Wen  
+**Professor:** Dr. Shane Johnson 
 **Affiliation:** University of Michigan-Shanghai Jiaotong University Joint Institute, Minhang District, Shanghai, China
 
 ## Abstract
